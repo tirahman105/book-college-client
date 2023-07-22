@@ -1,8 +1,10 @@
 import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../providers/AuthProvider";
+import { AuthContext } from "../../Providers/AuthProvider";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import GoogleLogin from "../Shared/GoogleLogin/GoogleLogin";
+
 
 
 const Login = () => {
@@ -118,7 +120,7 @@ const Login = () => {
           >
             Sign up
           </Link>
-          .
+          <GoogleLogin></GoogleLogin>
         </p>
           </div>
           
