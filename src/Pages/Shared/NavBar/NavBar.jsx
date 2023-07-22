@@ -1,11 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import { useContext } from "react";
 
 const Navbar = () => {
   
   const { user, logOut } = useContext(AuthContext);
-  
+
+
+ 
 
   const handleLogOut = () => {
       logOut()
@@ -25,13 +27,7 @@ const Navbar = () => {
           Admission
         </Link>
       </li>
-      {/* {user ? (
-        <li className="text-blue-800">
-          <Link to="/mytoys">My Toys</Link>
-        </li>
-      ) : (
-        ""
-      )} */}
+     
       <li className="text-blue-800">
         <Link to="/mycollege">My College</Link>
       </li>
@@ -84,6 +80,7 @@ const Navbar = () => {
               alt="User image"
             />
           </div>
+            <Link to={`/profile`}><p className="ms-2">{user.displayName}</p></Link>
         </div>
         <button onClick={handleLogOut} className="btn bg-orange-400  border-0 ml-2">
           Logout
