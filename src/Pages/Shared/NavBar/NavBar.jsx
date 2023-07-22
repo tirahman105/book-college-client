@@ -1,8 +1,17 @@
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../Providers/AuthProvider";
+import { useContext } from "react";
 
 const Navbar = () => {
   
+  const { user, logOut } = useContext(AuthContext);
+  
 
+  const handleLogOut = () => {
+      logOut()
+          .then(() => { })
+          .catch(error => console.log(error));
+  }
   const navItems = (
     <>
       <li className="text-blue-800">
@@ -65,9 +74,22 @@ const Navbar = () => {
     <ul className="menu menu-horizontal px-1">{navItems}</ul>
   </div>
   <div className="navbar-end">
-    
-    
-    
+  {user?.email ? (
+      <>
+        <div className="avatar placeholder">
+          <div className=" bg-neutral-focus text-neutral-content rounded-full w-8">
+            <img
+              src={user?.photoURL}
+              title={user.displayName}
+              alt="User image"
+            />
+          </div>
+        </div>
+        <button onClick={handleLogOut} className="btn bg-orange-400  border-0 ml-2">
+          Logout
+        </button>
+      </>
+    ) : (
       <>
         <button className="btn bg-blue-900 text-white hover:bg-blue-700 border-0 ml-2">
           <Link to="/login">Login</Link>
@@ -76,6 +98,17 @@ const Navbar = () => {
           <Link to="/signup">Register</Link>
         </button>
       </>
+    )}
+{/*     
+    
+      <>
+        <button className="btn bg-blue-900 text-white hover:bg-blue-700 border-0 ml-2">
+          <Link to="/login">Login</Link>
+        </button>
+        <button className="btn ml-2 border-0 bg-[#D36F3F] hover:bg-blue-700 text-white font-bold">
+          <Link to="/signup">Register</Link>
+        </button>
+      </> */}
     
   </div>
 </div>
