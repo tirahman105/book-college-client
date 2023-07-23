@@ -173,6 +173,7 @@ const MyAdmissionCard = ({ admission }) => {
       
       collegeName: data.collegeName,
       CandidateName: data.name,
+      CandidateImg:data.imgUrl,
       email: data.email,
       review: data.review,
      
@@ -206,6 +207,7 @@ const MyAdmissionCard = ({ admission }) => {
           <h1 className='text-2xl font-bold'>{name}</h1>
           <p>Location: {location}</p>
           <hr />
+          <img src={admission.imgUrl} alt="" />
           <h1>My Subject: {admission?.Subject} </h1>
           <h1>Application submit Date and time: {formattedCreatedAt} </h1>
           <div className="mb-2">
@@ -253,6 +255,19 @@ const MyAdmissionCard = ({ admission }) => {
                 className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
                 readOnly
                 
+              />
+            </div>
+            <div className='hidden'>
+              <label htmlFor="imgUrl" className="block text-gray-700">
+              Image url
+              </label>
+              <input
+                type="url"
+                id="imgUrl"
+                defaultValue={admission?.imgUrl}
+                {...register("imgUrl", { required: true })}
+                className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                readOnly
               />
             </div>
             <div>
