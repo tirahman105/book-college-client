@@ -29,7 +29,7 @@ const Navbar = () => {
       </li>
      
       <li className="text-blue-800">
-        <Link to="/mycollege">My College</Link>
+        <Link to="/myadmission">My College</Link>
       </li>
     </>
   );

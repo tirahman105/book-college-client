@@ -44,9 +44,9 @@ const AdmissionForm = () => {
   const onSubmit = (data) => {
     const admission = {
       
-      CollegeName: data.CollegeName,
+      name: data.CollegeName,
       CandidateName: data.name,
-      CadidateEmail: data.email,
+      email: data.email,
       mobile: data.mobile,
       Subject: data.subject,
       DOB:data.dob,
@@ -82,6 +82,7 @@ const AdmissionForm = () => {
           >
             <h1 className="text-3xl text-center font-semibold my-4">
               Admission Form for {collegeData?.name}
+              College ID {collegeData?._id}
             </h1>
             <div className="divider"></div>
 
