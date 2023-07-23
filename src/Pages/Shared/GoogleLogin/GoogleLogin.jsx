@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Providers/AuthProvider";
 
 
-const SocialLogin = () => {
+const GoogleLogin = () => {
   const { googleSignIn } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
@@ -52,4 +52,4 @@ const SocialLogin = () => {
   );
 };
 
-export default SocialLogin;
+export default GoogleLogin;
