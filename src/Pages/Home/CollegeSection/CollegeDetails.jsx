@@ -1,6 +1,10 @@
 import React from "react";
 import { useLoaderData } from "react-router-dom";
 import EventCard from "./EventCard";
+import ResearchCard from "./ResearchCard";
+import SportsCard from "./SportsCard";
+import '@smastrom/react-rating/style.css'
+import { Rating } from '@smastrom/react-rating'
 
 const CollegeDetails = () => {
   const colleges = useLoaderData();
@@ -13,13 +17,24 @@ const CollegeDetails = () => {
     admissionDate,
     events,    
 admission_process,
-    researchHistory,
-    sports,
+research_works,
+sports_categories,
+research_number, 
+rating
   } = colleges;
   return (
     <div>
       <div className="p-10 bg-[#3F5361] text-center text-white">
         <h1 className="text-3xl font-bold text-white p-4">{name}</h1>
+      <div className="flex justify-center items-center mb-3"><div className='flex '>
+      <div className="flex items-center">
+      
+        <Rating style={{ maxWidth: 150 }} 
+          value={Math.round(rating || 0)} readOnly />
+          <span>{rating}</span>
+      </div>
+          
+        </div></div>
         <hr />
 
         <h1>Admission Date: {admissionDate}</h1>
@@ -57,9 +72,34 @@ admission_process,
                       </EventCard>)
                   }
                </div>
-        <div>
-          
-        </div>
+        
+      </div>
+      <div>
+        <h1 className="text-2xl font-bold p-10 text-center">Research Works</h1>
+
+        <div className="grid md:grid-cols-2 gap-4 p-4 mx-auto justify-center">
+                  {
+                      research_works && research_works.map((research, index)=> <ResearchCard
+                      key={index}
+                      research= {research}>
+                      </ResearchCard>)
+                  }
+               </div>
+        
+      </div>
+      <div>
+        <h1 className="text-2xl font-bold mt-10 mb-5 text-center">Sports Categories</h1>
+        <p className="w-3/4 mx-auto text-center mb-4">Sports in colleges are crucial for physical health, teamwork, discipline, and social skills. They boost mental well-being, improve academics, and foster character traits like leadership and perseverance. Sports also offer career opportunities for passionate athletes.</p>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 mx-auto justify-center">
+                  {
+                      sports_categories && sports_categories.map((sports, index)=> <SportsCard
+                      key={index}
+                      sports= {sports}>
+                      </SportsCard>)
+                  }
+               </div>
+        
       </div>
 
     </div>
