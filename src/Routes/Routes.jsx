@@ -48,7 +48,7 @@ const router = createBrowserRouter([
 
       },
       {
-        path: '/admission/admissionform',
+        path: '/admissionform/:collegeId',
         element: <AdmissionForm></AdmissionForm>
       }
       ]

@@ -57,7 +57,7 @@ import {  FaUserPlus } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 
 const CollegeCard = ({ college }) => {
-  
+  const { _id, name, image, admissionDate, events, research_works, sports_categories } = college;
 
   return (
     <div className="bg-white rounded-lg shadow-md p-4">
