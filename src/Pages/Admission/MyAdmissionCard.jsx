@@ -1,33 +1,28 @@
-// // import React from 'react';
-
-// // const MyAdmissionCard = ({admission}) => {
-// //     return (
-// //         <div>
-// //             {admission.CollegeName}
-// //             {admission.CandidateName}
-// //         </div>
-// //     );
-// // };
-
-// // export default MyAdmissionCard;
-
 // import React, { useEffect, useState } from 'react';
+// import { useForm } from 'react-hook-form';
+// import { BsFillCalendarEventFill } from 'react-icons/bs';
+// import { FaUserPlus } from 'react-icons/fa';
+// import { Link } from 'react-router-dom';
+// import Swal from 'sweetalert2';
 
 // const MyAdmissionCard = ({ admission }) => {
 //   const [collegeDetails, setCollegeDetails] = useState(null);
+//   const [review, setReview] = useState(null);
+//   const { register, handleSubmit, reset } = useForm();
 
 //   useEffect(() => {
 //     const fetchCollegeDetails = async () => {
 //       try {
 //         // Fetch college details based on the college name from collegeCollection
-//         const response = await fetch(`http://localhost:5000/colleges/details/${admission.name}`);
+//         const response = await fetch(`http://localhost:5000/colleges/details/name/${admission.name}`);
 //         const data = await response.json();
+//         console.log('College Details:', data); 
 //         setCollegeDetails(data);
 //       } catch (error) {
 //         console.error('Error fetching college details:', error);
 //       }
 //     };
-  
+
 //     fetchCollegeDetails();
 //   }, [admission.name]);
 
@@ -35,17 +30,98 @@
 //     return <div>Loading...</div>;
 //   }
 
-//   const { _id, name, image, admissionDate, events, research_works, sports_categories } = collegeDetails;
+//   const { _id, name, location, image, admissionDate, events, research_works, sports_categories } = collegeDetails;
 
+//   const createdAtDate = new Date(admission?.createdAt);
+//   const formattedCreatedAt = createdAtDate.toLocaleString();
 
-//   // Render the My Admission card with college details
+//   const handleCloseModal = () => {
+//     setReview(null);
+//   };
+
+//   const updateReview = (event, item) => {
+//     event.preventDefault();
+//     event.stopPropagation();
+
+//     const formData = new FormData(event.target);
+//     const review = formData.get("review");
+
+//     fetch(`http://localhost:5000/colleges/${_id}`, {
+//       method: "PATCH",
+//       body: JSON.stringify({ review }),
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//     })
+//       .then((res) => res.json())
+//       .then((data) => {
+//         console.log(data);
+//         if (data.modifiedCount) {
+//           setReview(review); 
+//           Swal.fire({
+//             position: "top-end",
+//             icon: "success",
+//             showConfirmButton: false,
+//             timer: 1000,
+//           });
+//         }
+//       });
+//   };
+
 //   return (
 //     <div>
-//       <h3>{admission.name}</h3>
-//       {/* Render other college details from collegeDetails */}
-//       <p>Location: {admissionDate}</p>
-//       {/* <p>About: {collegeDetails.about}</p> */}
-//       {/* Add more college details as needed */}
+//       <div className='grid grid-cols-1 md:grid-cols-2'>
+//         <div>
+//           <img src={image} alt="" />
+//         </div>
+//         <div className=' bg-slate-300 ps-10 pt-4'>
+//           <h1 className='text-2xl font-bold'>{name}</h1>
+//           <p>Location: {location}</p>
+//           <hr />
+//           <h1>My Subject: {admission?.Subject} </h1>
+//           <h1>Application submit Date and time: {formattedCreatedAt} </h1>
+//           <div className="mb-2">
+//             <p className="font-semibold flex items-center gap-4 mt-5"> <BsFillCalendarEventFill></BsFillCalendarEventFill> <span>Upcoming Events:</span></p>
+//             <ul>
+//               {events && events.map((event, index) => (
+//                 <li className='border-l-4 w-1/2 rounded-xl border-blue-800 bg-slate-200 my-2 p-2' key={index}>{event.name}</li>
+//               ))}
+//             </ul>
+//           </div>
+//           <hr />
+
+//           <button className='btn btn-success' onClick={() => setReview(_id)}>Add Review</button>
+//           {_id && (
+//             <dialog id={_id} className="modal modal-bottom sm:modal-middle" open={review !== null}>
+//               <form
+//                 onSubmit={(event) => updateReview(event)}
+//                 method="dialog"
+//                 className="modal-box"
+//               >
+//                 <h3 className="font-bold text-lg">{name}</h3>
+//                 <div className="form-control">
+//                   <label className="label">
+//                     <span className="label-text">Review</span>
+//                   </label>
+//                   <input
+//                     {...register("review", { required: true })}
+//                     className="input input-bordered"
+//                     placeholder="Add review"
+//                   />
+//                 </div>
+//                 <div className="modal-action">
+//                   <button type="submit" className="btn">
+//                     Add Review
+//                   </button>
+//                   <button type="button" className="btn btn-error" onClick={handleCloseModal}>
+//                     Close
+//                   </button>
+//                 </div>
+//               </form>
+//             </dialog>
+//           )}
+//         </div>
+//       </div>
 //     </div>
 //   );
 // };
@@ -54,12 +130,14 @@
 
 
 import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { BsFillCalendarEventFill } from 'react-icons/bs';
-import { FaUserPlus } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const MyAdmissionCard = ({ admission }) => {
   const [collegeDetails, setCollegeDetails] = useState(null);
+  const [review, setReview] = useState('');
+  const { register, handleSubmit, reset } = useForm();
 
   useEffect(() => {
     const fetchCollegeDetails = async () => {
@@ -67,7 +145,7 @@ const MyAdmissionCard = ({ admission }) => {
         // Fetch college details based on the college name from collegeCollection
         const response = await fetch(`http://localhost:5000/colleges/details/name/${admission.name}`);
         const data = await response.json();
-        console.log('College Details:', data); 
+        console.log('College Details:', data);
         setCollegeDetails(data);
       } catch (error) {
         console.error('Error fetching college details:', error);
@@ -81,57 +159,141 @@ const MyAdmissionCard = ({ admission }) => {
     return <div>Loading...</div>;
   }
 
-  const { _id, name, image, admissionDate, events, research_works, sports_categories } = collegeDetails;
+  const { _id, name, location, image, admissionDate, events, research_works, sports_categories } = collegeDetails;
 
-  // Render the My Admission card with college details
+  const createdAtDate = new Date(admission?.createdAt);
+  const formattedCreatedAt = createdAtDate.toLocaleString();
+
+  const handleCloseModal = () => {
+    setReview('');
+  };
+
+  const onSubmit = (data) => {
+    const review = {
+      
+      collegeName: data.collegeName,
+      CandidateName: data.name,
+      email: data.email,
+      review: data.review,
+     
+    };
+
+    fetch("http://localhost:5000/reviews", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(review),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        Swal.fire("Success!", "Review submit successful.", "success").then(
+          () => {
+            reset();
+          }
+        );
+      });
+  };
+
   return (
     <div>
-      <h3>{admission.name}</h3>
-      {/* Render other college details from collegeDetails */}
-      <p>Location: {admissionDate}</p>
-      <div className="bg-white rounded-lg shadow-md p-4">
-      
-      <img className="w-full h-40 object-cover mb-4 rounded-t-lg" src={image} alt={name} />
-  
-    <h2 className="text-2xl font-bold text-center text-blue-800">{name}</h2>
-    <div className="m-5 p-5 bg-blue-100">
-     <p className="  flex items-center gap-2"> <FaUserPlus></FaUserPlus> <span> Admission open: {admissionDate}</span></p>
-     </div>
-    <div className="mb-2">
-      <p className="font-semibold flex items-center gap-4"> <BsFillCalendarEventFill></BsFillCalendarEventFill> <span>Upcoming Events:</span></p>
-      <ul>
-        {events && events.map((event, index) => (
-          <li className='border-l-4 border-blue-800 bg-slate-200 my-2 p-2' key={index}>{event.name}</li>
-        ))}
-      </ul>
-    </div>
-    <div className="mb-2">
-      <p className="font-semibold">Research Works:</p>
-      <ul>
-        {research_works && research_works.map((research, index) => (
-          <li className='border-l-4 border-blue-800 bg-slate-200 my-2 p-2' key={index}>{research.title}</li>
-        ))}
-      </ul>
-    </div>
-    <div className="mb-2">
-      <p className="font-semibold">Sports Categories:</p>
-      
-        {sports_categories && sports_categories.map((sport, index) => (
-          <button className='badge badge-outline' key={index}>{sport.name}</button>
-        ))}
-      
-    </div>
-    <div className='flex items-center justify-between mt-4'>
- 
- </div>
-    <div className='flex justify-center items-center mt-5'>
-      <Link to={`/colleges/${_id}`}>
-        <button className="btn bg-blue-800 text-white hover:bg-blue-700 transition duration-300 hover:text-white">
-          View Details
-        </button>
-      </Link>
-    </div>
-  </div>
+      <div className='grid grid-cols-1 md:grid-cols-2'>
+        <div>
+          <img src={image} alt="" />
+        </div>
+        <div className='bg-slate-300 ps-10 pt-4'>
+          <h1 className='text-2xl font-bold'>{name}</h1>
+          <p>Location: {location}</p>
+          <hr />
+          <h1>My Subject: {admission?.Subject} </h1>
+          <h1>Application submit Date and time: {formattedCreatedAt} </h1>
+          <div className="mb-2">
+            <p className="font-semibold flex items-center gap-4 mt-5"> <BsFillCalendarEventFill /> <span>Upcoming Events:</span></p>
+            <ul>
+              {events && events.map((event, index) => (
+                <li className='border-l-4 w-1/2 rounded-xl border-blue-800 bg-slate-200 my-2 p-2' key={index}>{event.name}</li>
+              ))}
+            </ul>
+          </div>
+          <hr />
+
+          <button className='btn btn-success' onClick={() => setReview(_id)}>Add Review</button>
+          {_id && (
+            <dialog id={_id} className="modal modal-bottom sm:modal-middle" open={review !== ''}>
+              <form
+               onSubmit={handleSubmit(onSubmit)}
+                method="dialog"
+                className="modal-box"
+              >
+                <h3 className="font-bold text-lg">{name}</h3>
+                <div >
+              <label htmlFor="collegeName" className="block text-gray-700">
+             College Name
+              </label>
+              <input
+                type="text"
+                id="collegeName"
+                defaultValue={name}
+                {...register("collegeName", { required: true, maxLength: 80 })}
+                className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                readOnly
+                
+              />
+            </div>
+                <div >
+              <label htmlFor="name" className="block text-gray-700">
+              Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                defaultValue={admission?.CandidateName}
+                {...register("name", { required: true, maxLength: 80 })}
+                className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                readOnly
+                
+              />
+            </div>
+            <div>
+              <label htmlFor="email" className="block text-gray-700">
+              Candidate Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                defaultValue={admission?.email}
+                {...register("email", { required: true, maxLength: 80 })}
+                className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                
+              />
+            </div>
+            <div >
+              <label htmlFor="review" className="block text-gray-700">
+              Review
+              </label>
+              <input
+                type="text"
+                id="review"
+                {...register("review", { required: true, maxLength: 80 })}
+                className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                
+              />
+            </div>
+         
+                <div className="modal-action">
+                  <button type="submit" className="btn">
+                    Add review
+                  </button>
+                  <button type="button" className="btn btn-error" onClick={handleCloseModal}>
+                    Close
+                  </button>
+                </div>
+              </form>
+            </dialog>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
