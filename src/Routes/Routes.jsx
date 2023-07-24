@@ -11,6 +11,8 @@ import AdmissionForm from "../Pages/Admission/AdmissionForm";
 import Myadmission from "../Pages/Admission/Myadmission";
 import PrivateRoute from "./PrivateRoute";
 import ErrorPage from "../Pages/Shared/ErrorPage/ErrorPage";
+import ResetPassword from "../Pages/ForgotPassword/ResetPassword";
+import ForgotPassword from "../Pages/ForgotPassword/ForgotPassword";
 
 
 const router = createBrowserRouter([
@@ -30,6 +32,16 @@ const router = createBrowserRouter([
         {
           path:'login',
           element: <Login></Login>
+        },
+        {
+          path:"/reset-password/:oobCode",
+          element:<ResetPassword></ResetPassword>
+
+        },
+        {
+          path:"/forgot-password",
+          element:<ForgotPassword></ForgotPassword>
+
         },
         {
           path:'profile/:id',
@@ -57,7 +69,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/myadmission',
-        element:<Myadmission></Myadmission>
+        element:<PrivateRoute><Myadmission></Myadmission></PrivateRoute>
       }
       ]
 

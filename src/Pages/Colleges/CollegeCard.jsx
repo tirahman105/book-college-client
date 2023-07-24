@@ -57,7 +57,7 @@ import {  FaUserPlus } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 
 const CollegeCard = ({ college }) => {
-  const { _id, name, image, admissionDate, events, research_works, sports_categories } = college;
+  const { _id, name, image, admissionDate, events, research_number, research_works, sports_categories } = college;
 
   return (
     <div className="bg-white rounded-lg shadow-md p-4">
@@ -77,12 +77,8 @@ const CollegeCard = ({ college }) => {
         </ul>
       </div>
       <div className="mb-2">
-        <p className="font-semibold">Research Works:</p>
-        <ul>
-          {research_works && research_works.map((research, index) => (
-            <li className='border-l-4 border-blue-800 bg-slate-200 my-2 p-2' key={index}>{research.title}</li>
-          ))}
-        </ul>
+        <p className="font-semibold">Research Works: {research_number}</p>
+        
       </div>
       <div className="mb-2">
         <p className="font-semibold">Sports Categories:</p>
