@@ -9,12 +9,15 @@ import CollegeDetails from "../Pages/Home/CollegeSection/CollegeDetails";
 import Admission from "../Pages/Admission/Admission";
 import AdmissionForm from "../Pages/Admission/AdmissionForm";
 import Myadmission from "../Pages/Admission/Myadmission";
+import PrivateRoute from "./PrivateRoute";
+import ErrorPage from "../Pages/Shared/ErrorPage/ErrorPage";
 
 
 const router = createBrowserRouter([
     {
       path: "/",
       element: <Main></Main>,
+      errorElement: <ErrorPage></ErrorPage>,
       children: [
         {
             path:'/',
@@ -30,7 +33,7 @@ const router = createBrowserRouter([
         },
         {
           path:'profile/:id',
-          element: <Profile></Profile>,
+          element: <PrivateRoute><Profile></Profile></PrivateRoute>,
           loader: ({params}) => fetch(`http://localhost:5000/details/${params.id}`)
         },
         {
@@ -40,7 +43,7 @@ const router = createBrowserRouter([
         },
         {
           path:'/colleges/:id',
-          element: <CollegeDetails></CollegeDetails>,
+          element: <PrivateRoute><CollegeDetails></CollegeDetails></PrivateRoute>,
           loader: ({params}) => fetch(`http://localhost:5000/colleges/details/${params.id}`)
       },
       {
