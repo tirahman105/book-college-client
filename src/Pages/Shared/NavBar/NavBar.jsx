@@ -80,8 +80,9 @@ const Navbar = () => {
               alt="User image"
             />
           </div>
-            <Link to={`/profile`}><p className="ms-2">{user.displayName}</p></Link>
+            <p className="ms-2">{user.displayName}</p>
         </div>
+      
         <button onClick={handleLogOut} className="btn bg-orange-400  border-0 ml-2">
           Logout
         </button>
