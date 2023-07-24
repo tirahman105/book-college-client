@@ -300,7 +300,7 @@ const MyAdmissionCard = ({ admission }) => {
               <input
                 type="text"
                 id="review"
-                {...register("review", { required: true, maxLength: 80 })}
+                {...register("review", { required: true })}
                 className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
                 
               />
