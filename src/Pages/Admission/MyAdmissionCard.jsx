@@ -14,7 +14,7 @@
 //     const fetchCollegeDetails = async () => {
 //       try {
 //         // Fetch college details based on the college name from collegeCollection
-//         const response = await fetch(`http://localhost:5000/colleges/details/name/${admission.name}`);
+//         const response = await fetch(`https://book-college-server-amber.vercel.app/colleges/details/name/${admission.name}`);
 //         const data = await response.json();
 //         console.log('College Details:', data); 
 //         setCollegeDetails(data);
@@ -46,7 +46,7 @@
 //     const formData = new FormData(event.target);
 //     const review = formData.get("review");
 
-//     fetch(`http://localhost:5000/colleges/${_id}`, {
+//     fetch(`https://book-college-server-amber.vercel.app/colleges/${_id}`, {
 //       method: "PATCH",
 //       body: JSON.stringify({ review }),
 //       headers: {
@@ -144,7 +144,7 @@ const MyAdmissionCard = ({ admission }) => {
     const fetchCollegeDetails = async () => {
       try {
         // Fetch college details based on the college name from collegeCollection
-        const response = await fetch(`http://localhost:5000/colleges/details/name/${admission.name}`);
+        const response = await fetch(`https://book-college-server-amber.vercel.app/colleges/details/name/${admission.name}`);
         const data = await response.json();
         console.log('College Details:', data);
         setCollegeDetails(data);
@@ -180,7 +180,7 @@ const MyAdmissionCard = ({ admission }) => {
      
     };
 
-    fetch("http://localhost:5000/reviews", {
+    fetch("https://book-college-server-amber.vercel.app/reviews", {
       method: "POST",
       headers: {
         "content-type": "application/json",

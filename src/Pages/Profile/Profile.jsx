@@ -36,7 +36,7 @@ export default Profile;
 
 //   useEffect(() => {
 //     // Fetch user data based on the id
-//     fetch(`http://localhost:5000/details/${id}`)
+//     fetch(`https://book-college-server-amber.vercel.app/details/${id}`)
 //       .then(response => response.json())
 //       .then(data => {
 //         setUser(data); // Set the user data in the state

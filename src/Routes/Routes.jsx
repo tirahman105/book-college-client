@@ -46,17 +46,17 @@ const router = createBrowserRouter([
         {
           path:'profile/:id',
           element: <PrivateRoute><Profile></Profile></PrivateRoute>,
-          loader: ({params}) => fetch(`http://localhost:5000/details/${params.id}`)
+          loader: ({params}) => fetch(`https://book-college-server-amber.vercel.app/details/${params.id}`)
         },
         {
           path:'colleges',
           element: <Colleges></Colleges>,
-          loader: () => fetch('http://localhost:5000/colleges')
+          loader: () => fetch('https://book-college-server-amber.vercel.app/colleges')
         },
         {
           path:'/colleges/:id',
           element: <PrivateRoute><CollegeDetails></CollegeDetails></PrivateRoute>,
-          loader: ({params}) => fetch(`http://localhost:5000/colleges/details/${params.id}`)
+          loader: ({params}) => fetch(`https://book-college-server-amber.vercel.app/colleges/details/${params.id}`)
       },
       {
         path:'/admission',

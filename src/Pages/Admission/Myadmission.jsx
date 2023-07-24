@@ -5,7 +5,7 @@
 // //     const { user } = useContext(AuthContext);
 // //   const [allAdmission, setAllAdmission] = useState([]);
 
-// //   const url = `http://localhost:5000/admission?email=${user?.email}`;
+// //   const url = `https://book-college-server-amber.vercel.app/admission?email=${user?.email}`;
 
 // //   useEffect(() => {
 // //     fetch(url)
@@ -33,7 +33,7 @@
 //   const { user } = useContext(AuthContext);
 //   const [allAdmission, setAllAdmission] = useState([]);
 
-//   const url = `http://localhost:5000/admission?email=${user?.email}`;
+//   const url = `https://book-college-server-amber.vercel.app/admission?email=${user?.email}`;
 
 //   useEffect(() => {
 //     const fetchAdmissions = async () => {
@@ -70,7 +70,7 @@ const Myadmission = () => {
   const { user } = useContext(AuthContext);
   const [allAdmission, setAllAdmission] = useState([]);
 
-  const url = `http://localhost:5000/admission?email=${user?.email}`;
+  const url = `https://book-college-server-amber.vercel.app/admission?email=${user?.email}`;
 
   useEffect(() => {
     const fetchAdmissions = async () => {

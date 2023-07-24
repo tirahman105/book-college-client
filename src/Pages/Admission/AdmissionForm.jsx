@@ -16,7 +16,7 @@ const AdmissionForm = () => {
     // Replace this with your data-fetching logic
     const fetchCollegeData = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/colleges/details/${collegeId}`);
+        const response = await fetch(`https://book-college-server-amber.vercel.app/colleges/details/${collegeId}`);
         const data = await response.json();
         setCollegeData(data);
         console.log(data)
@@ -53,7 +53,7 @@ const AdmissionForm = () => {
       imgUrl : data.imgUrl
     };
 
-    fetch("http://localhost:5000/admission", {
+    fetch("https://book-college-server-amber.vercel.app/admission", {
       method: "POST",
       headers: {
         "content-type": "application/json",

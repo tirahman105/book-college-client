@@ -7,7 +7,7 @@ const Admission = () => {
     const [colleges, setColleges] = useState([]);
  
     useEffect(() => {
-        fetch('http://localhost:5000/colleges')
+        fetch('https://book-college-server-amber.vercel.app/colleges')
           .then((res) => res.json())
           .then((result) => {
             setColleges(result);
