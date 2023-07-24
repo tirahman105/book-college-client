@@ -42,7 +42,7 @@ const AdmissionCollegeCard = ({ college }) => {
       </Link>
       <p className="flex justify-center items-center gap-2"> <FaUserPlus></FaUserPlus> <span> Admission open: {admissionDate}</span></p>
       <div className='flex items-center justify-center mt-4'>
-        <button className='text-center btn btn-primary'>Get Admission</button>
+       
       </div>
     </div>
   );

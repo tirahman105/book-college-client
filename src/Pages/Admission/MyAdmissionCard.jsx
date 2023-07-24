@@ -132,6 +132,7 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { BsFillCalendarEventFill } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const MyAdmissionCard = ({ admission }) => {
@@ -199,6 +200,15 @@ const MyAdmissionCard = ({ admission }) => {
 
   return (
     <div>
+      <div className="bg-[#3F5361] p-10 text-white text-center">
+                  <h1 className="text-3xl font-bold ">My College</h1>
+                  <p className="my-3 text-3xl">{name} </p>
+                  <Link to={`/colleges/${_id}`}>
+          <button className="btn bg-blue-800 text-white hover:bg-blue-700 transition duration-300 hover:text-white">
+            View Details
+          </button>
+        </Link>
+                </div>
       <div className='grid grid-cols-1 md:grid-cols-2'>
         <div>
           <img src={image} alt="" />
@@ -207,7 +217,7 @@ const MyAdmissionCard = ({ admission }) => {
           <h1 className='text-2xl font-bold'>{name}</h1>
           <p>Location: {location}</p>
           <hr />
-          <img src={admission.imgUrl} alt="" />
+          {/* <img src={admission.imgUrl} alt="" /> */}
           <h1>My Subject: {admission?.Subject} </h1>
           <h1>Application submit Date and time: {formattedCreatedAt} </h1>
           <div className="mb-2">
@@ -220,7 +230,7 @@ const MyAdmissionCard = ({ admission }) => {
           </div>
           <hr />
 
-          <button className='btn btn-success' onClick={() => setReview(_id)}>Add Review</button>
+          <button className='btn btn-success mt-5' onClick={() => setReview(_id)}>Add Review</button>
           {_id && (
             <dialog id={_id} className="modal modal-bottom sm:modal-middle" open={review !== ''}>
               <form

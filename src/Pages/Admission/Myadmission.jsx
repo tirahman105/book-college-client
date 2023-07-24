@@ -88,7 +88,7 @@ const Myadmission = () => {
 
   return (
     <div>
-      My admission {allAdmission.length}
+      {/* My admission {allAdmission.length} */}
       {allAdmission.map((admission, index) => (
         <MyAdmissionCard key={admission._id} admission={admission} index={index + 1} />
       ))}
